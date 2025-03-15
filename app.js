@@ -108,7 +108,7 @@ if (window.areWeUI) {
     
     function loadOldUrl(customurl=undefined) {
         try {
-            const oldUrlParams = new URL(customurl ?? document.getElementById("old-url").value).searchParams;
+            const oldUrlParams = new URL(typeof customurl === "string" ? customurl : document.getElementById("old-url").value).searchParams;
             const oldSearchEngine = base64Decode(oldUrlParams.get("e"));
             document.getElementById("search-engine").value = oldSearchEngine;
             document.getElementById("old-url").value = "";
