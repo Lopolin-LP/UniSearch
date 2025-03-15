@@ -1,11 +1,14 @@
+// Globals
+const sre = "{{{s}}}" // Search Replace Entity
+
 // Site
 const mysite = `
 <main>
     <h1>UniSearch</h1>
     <p>Your favourite search engine + DuckDuckGo Bangs</p>
     <h1>Configure</h1>
-    <label for="search-engine">Search Engine (<code>{{{s}}}</code> for search query)</label>
-    <input name="search-engine" id="search-engine" type="text" placeholder="e.g. https://www.qwant.com/?q={{{s}}}">
+    <label for="search-engine">Search Engine (<code>${sre}</code> for search query)</label>
+    <input name="search-engine" id="search-engine" type="text" placeholder="e.g. https://www.qwant.com/?q=${sre}">
     <h1>Result</h1>
     <p>Set this as your search engine.</p>
     <p>Auto copies to clipboard on click or enter-press while focused.</p>
@@ -23,9 +26,6 @@ const mysite = `
     <p>Source Code on <a href="https://github.com/Lopolin-LP/UniSearch" target="_blank">GitHub</a></p>
 </main>
 `;
-
-// Globals
-const sre = "{{{s}}}" // Search Replace Entity
 
 // Base64 https://stackoverflow.com/a/30106551 & https://stackoverflow.com/a/77383580
 function base64Encode (str) {
