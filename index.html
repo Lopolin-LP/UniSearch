@@ -18,6 +18,7 @@
         if (window.areWeUI) {
             document.head.insertAdjacentHTML("beforeend", '<link rel="stylesheet" blocking="render" href="style.css">');
             document.body.innerHTML = mysite;
+            window.dispatchEvent(new Event("manualload"));
         }
     </script>
 </body>

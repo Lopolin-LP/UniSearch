@@ -134,7 +134,7 @@ if (window.areWeUI) {
         document.execCommand('copy');
     }
     
-    window.addEventListener("load", () => {
+    window.addEventListener("manualload", () => {
         document.querySelectorAll("input").forEach(x => x.addEventListener("input", updateResult));
         updateResult();
         document.getElementById("load-old-url").addEventListener("click", loadOldUrl);
