@@ -25,10 +25,13 @@ function replaceSearchQuery(url, search) {
 
 // Actual logic
 const urlParam = new URLSearchParams(window.location.search);
-const urlRaw = urlParam.get("s").split(" "); // don't use
-const urlSearch = urlRaw[0].startsWith("!") ? urlRaw.splice(1).join(" ") : urlRaw.splice(0, Infinity).join(" ");
-const urlBang = urlRaw.join(" ").replace("!", "");
-const searchEngine = urlParam.get("e");
+const urlRaw = urlParam.get("s")?.split(" "); // don't use
+if (urlRaw) {
+    const urlSearch = urlRaw[0].startsWith("!") ? urlRaw.splice(1).join(" ") : urlRaw.splice(0, Infinity).join(" ");
+    const urlBang = urlRaw.join(" ").replace("!", "");
+    const searchEngine = urlParam.get("e");
+    exec();
+}
 
 function exec() {
     if (urlBang) {
@@ -42,8 +45,6 @@ function exec() {
         window.location.replace(replaceSearchQuery(base64Decode(searchEngine), urlSearch));
     }
 }
-
-exec();
 
 // Other
 
