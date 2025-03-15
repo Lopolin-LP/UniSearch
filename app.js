@@ -53,7 +53,7 @@ function exec() {
 
 function updateResult() {
     const se = document.getElementById("search-engine").value;
-    let result = window.location.protocol + "//" + window.location.pathname + "?e=" + base64Encode(se) + "&s=%s";
+    let result = window.location.origin + window.location.pathname + "?e=" + base64Encode(se) + "&s=%s";
     if (se === "") {
         result = "Input search engine.";
     } else if (se.indexOf(sre) == -1) {
