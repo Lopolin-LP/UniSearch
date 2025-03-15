@@ -24,25 +24,28 @@ function replaceSearchQuery(url, search) {
 }
 
 // Actual logic
-const urlParam = new URLSearchParams(window.location.search);
-const urlRaw = urlParam.get("s")?.split(" "); // don't use
-if (urlRaw) {
-    const urlSearch = urlRaw[0].startsWith("!") ? urlRaw.splice(1).join(" ") : urlRaw.splice(0, Infinity).join(" ");
-    const urlBang = urlRaw.join(" ").replace("!", "");
-    const searchEngine = urlParam.get("e");
+const myurl = {};
+myurl.param = new URLSearchParams(window.location.search);
+myurl.raw = myurl.param.get("s")?.split(" "); // don't use
+if (myurl.raw) {
+    myurl.search = myurl.raw[0].startsWith("!") ? myurl.raw.splice(1).join(" ") : myurl.raw.splice(0, Infinity).join(" ");
+    myurl.bang = myurl.raw.join(" ").replace("!", "");
+    myurl.searchengine = myurl.param.get("e");
     exec();
 }
 
 function exec() {
-    if (urlBang) {
-        const bangMatch = matchBang(urlBang);
+    if (myurl.bang) {
+        const bangMatch = matchBang(myurl.bang);
         if (bangMatch) {
-            window.location.replace(replaceSearchQuery(bangMatch, urlSearch));
+            window.location.replace(replaceSearchQuery(bangMatch, myurl.search));
             return;
+        } else {
+            myurl.search = "!" + myurl.bang + " " + myurl.search; // yea we fakin' it
         }
     }
-    if (searchEngine) {
-        window.location.replace(replaceSearchQuery(base64Decode(searchEngine), urlSearch));
+    if (myurl.searchengine) {
+        window.location.replace(replaceSearchQuery(base64Decode(myurl.searchengine), myurl.search));
     }
 }
 
@@ -69,17 +72,16 @@ function loadOldUrl() {
     try {
         const oldUrlParams = new URL(document.getElementById("old-url").value).searchParams;
         const oldSearchEngine = base64Decode(oldUrlParams.get("e"));
+        document.getElementById("search-engine").value = oldSearchEngine;
+        document.getElementById("old-url").value = "";
     } catch (e) {
         if (e.message == "URL constructor: wae is not a valid URL.") {
             alert("Input a valid URL.");
         } else {
             throw e;
         }
-        return;
     }
-    document.getElementById("search-engine").value = oldSearchEngine;
-    document.getElementById("old-url").value = "";
-    console.log(oldUrlParams, oldSearchEngine);
+    updateResult();
 }
 
 function copy_text(element) { // https://stackoverflow.com/a/34503498
