@@ -7,32 +7,18 @@
     <meta name="description" content="Your favourite search engine + DuckDuckGo Bangs" />
     <meta name="author" content="Lopolin" />
     <meta name="color-scheme" content="dark light" />
-    <link rel="stylesheet" href="style.css">
+    <meta name="robots" content="index">
     <script src="bang.js"></script>
     <script src="app.js"></script>
 </head>
 <body>
-    <main>
-        <h1>UniSearch</h1>
-        <p>Your favourite search engine + DuckDuckGo Bangs</p>
-        <h1>Configure</h1>
-        <label for="search-engine">Search Engine (<code>{{{s}}}</code> for search query)</label>
-        <input name="search-engine" id="search-engine" type="text" placeholder="e.g. https://www.qwant.com/?q={{{s}}}">
-        <h1>Result</h1>
-        <p>Set this as your search engine.</p>
-        <p>Auto copies to clipboard on click or enter-press while focused.</p>
-        <code id="result" tabindex="0"></code>
-        <h1>Load old Configuration</h1>
-        <span>
-            <label for="old-url">Old URL</label>
-            <input name="old-url" id="old-url" type="text">
-            <button id="load-old-url" type="button">Load</button>
-        </span>
-        <h1>Notes</h1>
-        <p>This site has next to no error handling. If you type something wrong, that's your problem.</p>
-        <p>Inspired by <a href="https://github.com/t3dotgg/unduck" target="_blank">Unduck</a></p>
-        <p>Stole Bangs from <a href="https://duckduckgo.com/bang.js" target="_blank">here</a></p>
-        <p>Source Code on <a href="https://github.com/Lopolin-LP/UniSearch" target="_blank">GitHub</a></p>
-    </main>
+    <div id="enable-js">Enable JS.</div>
+    <script>
+        document.getElementById("enable-js").remove();
+        if (window.areWeUI) {
+            document.head.insertAdjacentHTML("beforeend", '<link rel="stylesheet" blocking="render" href="style.css">');
+            document.body.innerHTML = mysite;
+        }
+    </script>
 </body>
 </html>
