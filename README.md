@@ -13,3 +13,9 @@ Your favourite search engine + DuckDuckGo Bangs
 
 ## Why
 I like bangs, but DuckDuckGo slow and me no want DuckDuckGo anymore.
+
+## Dev Info
+When updating the bang.js, run it through `efficientBangs(bangs)` and put the return value (by right click + copy object) into bang.js, minify document, set to the global variable `bangs`.
+
+# Licencing
+bang.js is exempt, otherwise MIT. For proper credits just open the site.

@@ -41,7 +41,17 @@ function base64Decode (str) {
 // Match bang
 function matchBang(str) {
     // Returns the URL to navigate to; if not found, then undefined
-    return bangs.filter(x => x.t === str)[0]?.u;
+    return bangs[str]?.u;
+}
+
+function efficientBangs(bangs) {
+    // Takes duckduckgo bangs and makes them faster to look up. This function is only used during development.
+    // https://stackoverflow.com/a/36388401
+    let result = {}; // I tried to do .reduce(), it didn't go well
+    bangs.forEach(x => {
+        result[x.t] = x;
+    });
+    return result;
 }
 
 // replace sre with URL
